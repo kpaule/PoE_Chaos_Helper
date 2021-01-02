@@ -1,5 +1,5 @@
 ﻿# Chaos Helper
-- Automatically adjusts filter
+- Automatically adjusts item filter
 - Highlights full chaos recipe items with overlay
 - Can be configured for every resolution
 - User Friendly settings
