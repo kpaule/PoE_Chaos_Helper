@@ -47,7 +47,7 @@ namespace PoE_Chaos_Helper
 
                 // check whats missing
                 List<string> missing = new List<string>();
-                if(countOneHandedWeapon < maxSets)
+                if(countOneHandedWeapon < maxSets * 2)
                 {
                     missing.Add("One Hand Swords");
                     missing.Add("Daggers");

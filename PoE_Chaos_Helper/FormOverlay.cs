@@ -49,7 +49,7 @@ namespace PoE_Chaos_Helper
             {
                 Color[] colArr = { Color.Yellow, Color.Red, Color.Purple, Color.DarkBlue, Color.Blue, Color.LightBlue, Color.Cyan, Color.Green, Color.LightGreen, Color.Pink, Color.Beige, Color.Brown, Color.DarkRed, Color.Olive, Color.Orange, Color.Salmon };
 
-                HatchBrush semiTransBrush = new HatchBrush(HatchStyle.Percent50, TransparencyKey, colArr[setCount]);
+                HatchBrush semiTransBrush = new HatchBrush(HatchStyle.Percent75, TransparencyKey, colArr[setCount]);
 
                 foreach (PoE.Item item in set.Values)
                 {
@@ -61,8 +61,11 @@ namespace PoE_Chaos_Helper
                     bitmapGraphics.FillRectangle(semiTransBrush, itemX, itemY, itemWidth, itemHeight);
                 }
 
-                if (setCount >= colArr.Length)
-                    setCount = 0;
+                if (setCount >= colArr.Length - 1)
+                {
+                    // oh no! we ran out of colors
+                    break;
+                }
                 else
                     setCount++;
             }
@@ -91,7 +94,7 @@ namespace PoE_Chaos_Helper
             {
                 string type;
 
-                if (item.icon.Contains("One Hand Swords") || item.icon.Contains("Daggers") || item.icon.Contains("Rune Dagger"))
+                if ( item.icon.Contains("Wands") || item.icon.Contains("OneHandSwords") || item.icon.Contains("Daggers"))
                 {
                     type = "OneHanded";
                 }
@@ -128,35 +131,61 @@ namespace PoE_Chaos_Helper
                     type = "Nothing";
                 }
 
-                bool foundSet = false;
-                foreach (var set in matrix)
+                if(type != "Nothing")
                 {
-                    if (!set.ContainsKey(type))
+                    bool foundSet = false;
+                    foreach (var set in matrix)
                     {
-                        set.Add(type, item);
-                        foundSet = true;
-                    }
-                    else
-                    {
-                        // for rings we have to check if there are 2.
-                        if(type == "Rings")
+
+                        if (!set.ContainsKey(type))
                         {
-                            if (set.ContainsKey("Rings2") == false)
+                            set.Add(type, item);
+                            foundSet = true;
+                            break;
+                        }
+                        else
+                        {
+                            // for rings we have to check if there are 2.
+                            if (type == "Rings")
                             {
-                                set.Add("Rings2", item);
-                                foundSet = true;
+                                if (set.ContainsKey("Rings2") == false)
+                                {
+                                    set.Add("Rings2", item);
+                                    foundSet = true;
+                                    break;
+                                }
+                            }
+                            else if(type == "OneHanded")
+                            {
+                                if (set.ContainsKey("OneHanded2") == false)
+                                {
+                                    set.Add("OneHanded2", item);
+                                    foundSet = true;
+                                    break;
+                                }
                             }
                         }
                     }
+
+                    if (foundSet == false)
+                    {
+                        Dictionary<String, PoE.Item> temp = new Dictionary<string, PoE.Item>();
+                        temp.Add(type, item);
+                        matrix.Add(temp);
+                    }
+
                 }
 
-                if(foundSet == false)
+            }
+
+            for (int i = matrix.Count; i > 0; i--)
+            {
+                var set = matrix.ElementAt(i-1);
+
+                if (set.Count < 10)
                 {
-                    Dictionary<String, PoE.Item> temp = new Dictionary<string, PoE.Item>();
-                    temp.Add(type, item);
-                    matrix.Add(temp);
+                    matrix.RemoveAt(i-1);
                 }
-
             }
 
             return matrix;

@@ -12,8 +12,13 @@ namespace PoE_Chaos_Helper
         private string start = "# Chaos Helper - Start #";
         private string stop = "# Chaos Helper - Stop #";
         private string template = "Show\n" +
-            "SetBorderColor 200 0 0\n" +
-            "SetFontSize 38\n" +
+            "SetBorderColor 50 130 165 255\n" +
+            "SetFontSize 45\n" +
+            "SetTextColor 50 130 165 255\n" +
+            "SetBackgroundColor 255 255 255 255\n" +
+            "PlayAlertSound 1 300\n" +
+            "PlayEffect Red\n" +
+            "MinimapIcon 0 Red Cross\n" +
             "ItemLevel >= 60\n" +
             "Rarity = Rare\n" +
             "{0}\n" +
