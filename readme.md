@@ -1,4 +1,4 @@
-﻿# Installation
+﻿# Chaos Helper
 
 ## Warning
 This is a very early version. 
