@@ -42,13 +42,14 @@ namespace PoE_Chaos_Helper
                 string json = response.Content.ReadAsStringAsync().Result;
 
                 stash = JsonConvert.DeserializeObject<PoE.Stash>(json);
+
+                return stash;
             }
             else
             {
-                stash = new PoE.Stash();
+                return null;
             }
 
-            return stash;
         }
 
     }

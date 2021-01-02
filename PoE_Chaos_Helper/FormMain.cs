@@ -30,61 +30,70 @@ namespace PoE_Chaos_Helper
 
             PoE.Stash stash = await getStashAsync(poessid, league, accountName, tabIndex);
 
-            // count items eligible for the chaos recipe
-            List<PoE.Item> eligible = getEligibleForRecipe(stash.items);
-
-            string tabType = stash.tabs.ElementAt(tabIndex).type;
-            if (formOverlay != null)
-                formOverlay.PaintItems(eligible, tabType);
-
-            int countOneHandedWeapon = countType(eligible, "OneHandWeapons");
-            int countHelmet = countType(eligible, "Helmets");
-            int countBodyArmour = countType(eligible, "BodyArmours");
-            int countGloves = countType(eligible, "Gloves");
-            int countBoots = countType(eligible, "Boots");
-            int countBelt = countType(eligible, "Belts");
-            int countAmulet = countType(eligible, "Amulets");
-            int countRing = countType(eligible, "Rings");
-
-            // check whats missing
-            List<string> missing = new List<string>();
-            if(countOneHandedWeapon < maxSets)
+            if(stash != null)
             {
-                missing.Add("One Hand Swords");
-                missing.Add("Daggers");
-                missing.Add("Rune Dagger");
+                // count items eligible for the chaos recipe
+                List<PoE.Item> eligible = getEligibleForRecipe(stash.items);
+
+                string tabType = stash.tabs.ElementAt(tabIndex).type;
+                if (formOverlay != null)
+                    formOverlay.PaintItems(eligible, tabType);
+
+                int countOneHandedWeapon = countType(eligible, "OneHandWeapons");
+                int countHelmet = countType(eligible, "Helmets");
+                int countBodyArmour = countType(eligible, "BodyArmours");
+                int countGloves = countType(eligible, "Gloves");
+                int countBoots = countType(eligible, "Boots");
+                int countBelt = countType(eligible, "Belts");
+                int countAmulet = countType(eligible, "Amulets");
+                int countRing = countType(eligible, "Rings");
+
+                // check whats missing
+                List<string> missing = new List<string>();
+                if(countOneHandedWeapon < maxSets)
+                {
+                    missing.Add("One Hand Swords");
+                    missing.Add("Daggers");
+                    missing.Add("Rune Dagger");
+
+                }
+                if (countHelmet < maxSets)
+                    missing.Add("Helmets");
+                if (countBodyArmour < maxSets)
+                    missing.Add("Body Armour");
+                if (countGloves < maxSets)
+                    missing.Add("Gloves");
+                if (countBoots < maxSets)
+                    missing.Add("Boots");
+                if (countBelt < maxSets)
+                    missing.Add("Belt");
+                if (countAmulet < maxSets)
+                    missing.Add("Amulets");
+                if (countRing < (maxSets * 2))
+                    missing.Add("Rings");
+
+                // do filter here
+                Filter filter = new Filter();
+                filter.Modify(filterPath, missing);
+
+                // Update GUI
+                textBoxTabName.Text = stash.tabs.ElementAt(tabIndex).n;
+                textBoxOneHandedWeapon.Text = countOneHandedWeapon + " / " + maxSets;
+                textBoxHelmet.Text = countHelmet + " / " + maxSets;
+                textBoxBodyArmour.Text = countBodyArmour + " / " + maxSets;
+                textBoxGloves.Text = countGloves + " / " + maxSets;
+                textBoxBoots.Text = countBoots + " / " + maxSets;
+                textBoxBelt.Text = countBelt + " / " + maxSets;
+                textBoxAmulet.Text = countAmulet + " / " + maxSets;
+                textBoxRing.Text = countRing + " / " + (maxSets * 2);
 
             }
-            if (countHelmet < maxSets)
-                missing.Add("Helmets");
-            if (countBodyArmour < maxSets)
-                missing.Add("Body Armour");
-            if (countGloves < maxSets)
-                missing.Add("Gloves");
-            if (countBoots < maxSets)
-                missing.Add("Boots");
-            if (countBelt < maxSets)
-                missing.Add("Belt");
-            if (countAmulet < maxSets)
-                missing.Add("Amulets");
-            if (countRing < (maxSets * 2))
-                missing.Add("Rings");
-
-            // do filter here
-            Filter filter = new Filter();
-            filter.Modify(filterPath, missing);
-
-            // Update GUI
-            textBoxTabName.Text = stash.tabs.ElementAt(tabIndex).n;
-            textBoxOneHandedWeapon.Text = countOneHandedWeapon + " / " + maxSets;
-            textBoxHelmet.Text = countHelmet + " / " + maxSets;
-            textBoxBodyArmour.Text = countBodyArmour + " / " + maxSets;
-            textBoxGloves.Text = countGloves + " / " + maxSets;
-            textBoxBoots.Text = countBoots + " / " + maxSets;
-            textBoxBelt.Text = countBelt + " / " + maxSets;
-            textBoxAmulet.Text = countAmulet + " / " + maxSets;
-            textBoxRing.Text = countRing + " / " + (maxSets * 2);
-
+            else
+            {
+                timer.Stop();
+                buttonStart.Text = "Start";
+                MessageBox.Show("Couldn't get stash from poe api. Are the settings correct? Is your POESESSID expired?", "Api Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private Task<PoE.Stash> getStashAsync(string poessid, string league, string accountName, int tabIndex)
