@@ -183,5 +183,11 @@ namespace PoE_Chaos_Helper
                 timer.Stop();
             }
         }
+
+        private void aboutChaosHelperToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormAbout formAbout = new FormAbout();
+            formAbout.Show();
+        }
     }
 }

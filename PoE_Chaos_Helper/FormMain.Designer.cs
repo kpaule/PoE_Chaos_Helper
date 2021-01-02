@@ -54,6 +54,8 @@ namespace PoE_Chaos_Helper
             this.menuStrip = new System.Windows.Forms.MenuStrip();
             this.overlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.HelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutChaosHelperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxItems.SuspendLayout();
             this.menuStrip.SuspendLayout();
             this.SuspendLayout();
@@ -277,7 +279,8 @@ namespace PoE_Chaos_Helper
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.overlayToolStripMenuItem,
-            this.settingsToolStripMenuItem});
+            this.settingsToolStripMenuItem,
+            this.HelpToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(294, 24);
@@ -297,6 +300,21 @@ namespace PoE_Chaos_Helper
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // HelpToolStripMenuItem
+            // 
+            this.HelpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutChaosHelperToolStripMenuItem});
+            this.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem";
+            this.HelpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.HelpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutChaosHelperToolStripMenuItem
+            // 
+            this.aboutChaosHelperToolStripMenuItem.Name = "aboutChaosHelperToolStripMenuItem";
+            this.aboutChaosHelperToolStripMenuItem.Size = new System.Drawing.Size(181, 22);
+            this.aboutChaosHelperToolStripMenuItem.Text = "About Chaos Helper";
+            this.aboutChaosHelperToolStripMenuItem.Click += new System.EventHandler(this.aboutChaosHelperToolStripMenuItem_Click);
             // 
             // FormMain
             // 
@@ -347,6 +365,8 @@ namespace PoE_Chaos_Helper
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem overlayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem HelpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutChaosHelperToolStripMenuItem;
     }
 }
 
