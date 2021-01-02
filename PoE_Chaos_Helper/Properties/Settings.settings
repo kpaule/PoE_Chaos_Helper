@@ -20,8 +20,14 @@
     <Setting Name="FilterPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="FilterClasses" Type="System.Collection.Generic.List&lt;System.String&gt;" Scope="User">
+    <Setting Name="FilterClasses" Type="System.Collections.Generic.List&lt;System.String&gt;" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="OverlayLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">16, 126</Value>
+    </Setting>
+    <Setting Name="OverlaySize" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">635, 635</Value>
     </Setting>
   </Settings>
 </SettingsFile>

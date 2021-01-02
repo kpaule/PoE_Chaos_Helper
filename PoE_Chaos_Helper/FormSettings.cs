@@ -6,6 +6,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +27,10 @@ namespace PoE_Chaos_Helper
             textBoxTabIndex.Text = Properties.Settings.Default.TabIndex.ToString();
             textBoxMaxSets.Text = Properties.Settings.Default.MaxSets.ToString();
             textBoxFilterPath.Text = Properties.Settings.Default.FilterPath;
+
+
+            textBoxOverlayLocation.Text = Properties.Settings.Default.OverlayLocation.ToString();
+            textBoxOverlaySize.Text = Properties.Settings.Default.OverlaySize.ToString();
         }
 
         private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
@@ -36,6 +41,16 @@ namespace PoE_Chaos_Helper
             Properties.Settings.Default.TabIndex = int.Parse(textBoxTabIndex.Text);
             Properties.Settings.Default.MaxSets = int.Parse(textBoxMaxSets.Text);
             Properties.Settings.Default.FilterPath = textBoxFilterPath.Text;
+
+            // parse string to system.drawing.point
+            var p = Regex.Replace(textBoxOverlayLocation.Text, @"[\{\}a-zA-Z=]", "").Split(',');
+            Point point = new Point(int.Parse(p[0]), int.Parse(p[1]));
+            Properties.Settings.Default.OverlayLocation = point;
+
+            // parse string to system.drawing.size
+            p = Regex.Replace(textBoxOverlaySize.Text, @"[\{\}a-zA-Z=]", "").Split(',');
+            Size size = new Size(int.Parse(p[0]), int.Parse(p[1]));
+            Properties.Settings.Default.OverlaySize = size;
 
             Properties.Settings.Default.Save();
         }

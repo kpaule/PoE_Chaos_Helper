@@ -105,5 +105,29 @@ namespace PoE_Chaos_Helper.Properties {
                 this["FilterClasses"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("16, 126")]
+        public global::System.Drawing.Point OverlayLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["OverlayLocation"]));
+            }
+            set {
+                this["OverlayLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("635, 635")]
+        public global::System.Drawing.Size OverlaySize {
+            get {
+                return ((global::System.Drawing.Size)(this["OverlaySize"]));
+            }
+            set {
+                this["OverlaySize"] = value;
+            }
+        }
     }
 }

@@ -52,6 +52,7 @@ namespace PoE_Chaos_Helper
             this.labelHelmet = new System.Windows.Forms.Label();
             this.textBoxHelmet = new System.Windows.Forms.TextBox();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
+            this.overlayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxItems.SuspendLayout();
             this.menuStrip.SuspendLayout();
@@ -59,7 +60,7 @@ namespace PoE_Chaos_Helper
             // 
             // timer
             // 
-            this.timer.Interval = 5000;
+            this.timer.Interval = 10000;
             this.timer.Tick += new System.EventHandler(this.timer_Tick);
             // 
             // buttonStart
@@ -275,12 +276,20 @@ namespace PoE_Chaos_Helper
             // menuStrip
             // 
             this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.overlayToolStripMenuItem,
             this.settingsToolStripMenuItem});
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Size = new System.Drawing.Size(294, 24);
             this.menuStrip.TabIndex = 9;
-            this.menuStrip.Text = "menuStrip1";
+            this.menuStrip.Text = "menuStrip";
+            // 
+            // overlayToolStripMenuItem
+            // 
+            this.overlayToolStripMenuItem.Name = "overlayToolStripMenuItem";
+            this.overlayToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
+            this.overlayToolStripMenuItem.Text = "Overlay";
+            this.overlayToolStripMenuItem.Click += new System.EventHandler(this.overlayToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -337,6 +346,7 @@ namespace PoE_Chaos_Helper
         private System.Windows.Forms.TextBox textBoxGloves;
         private System.Windows.Forms.MenuStrip menuStrip;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem overlayToolStripMenuItem;
     }
 }
 

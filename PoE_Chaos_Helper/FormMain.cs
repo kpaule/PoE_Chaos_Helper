@@ -12,6 +12,8 @@ namespace PoE_Chaos_Helper
 {
     public partial class FormMain : Form
     {
+        FormOverlay formOverlay;
+
         public FormMain()
         {
             InitializeComponent();
@@ -30,6 +32,11 @@ namespace PoE_Chaos_Helper
 
             // count items eligible for the chaos recipe
             List<PoE.Item> eligible = getEligibleForRecipe(stash.items);
+
+            string tabType = stash.tabs.ElementAt(tabIndex).type;
+            if (formOverlay != null)
+                formOverlay.PaintItems(eligible, tabType);
+
             int countOneHandedWeapon = countType(eligible, "OneHandWeapons");
             int countHelmet = countType(eligible, "Helmets");
             int countBodyArmour = countType(eligible, "BodyArmours");
@@ -125,6 +132,21 @@ namespace PoE_Chaos_Helper
             }
 
             return eligible;
+        }
+
+        private void overlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (formOverlay == null)
+            {
+                formOverlay = new FormOverlay();
+                formOverlay.Show();
+                updateTab();
+            }
+            else
+            {
+                formOverlay.Close();
+                formOverlay = null;
+            }
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)

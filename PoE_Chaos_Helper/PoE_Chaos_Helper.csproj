@@ -6,7 +6,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{21BF7C2D-CA2F-4AF0-9EA7-63183840B42E}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>PoE_Chaos_Helper</RootNamespace>
     <AssemblyName>PoE_Chaos_Helper</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -80,6 +80,12 @@
     <Compile Include="FormSettings.Designer.cs">
       <DependentUpon>FormSettings.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormOverlay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormOverlay.Designer.cs">
+      <DependentUpon>FormOverlay.cs</DependentUpon>
+    </Compile>
     <Compile Include="PoeApi.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -98,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormSettings.resx">
       <DependentUpon>FormSettings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormOverlay.resx">
+      <DependentUpon>FormOverlay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
