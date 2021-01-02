@@ -1,8 +1,13 @@
 ﻿# Chaos Helper
-![](https://i.imgur.com/g0R4RWm.png)
+- Automatically adjusts filter
+- Highlights full chaos recipe items with overlay
+- Can be configured for every resolution
+- User Friendly settings
+
+![](https://i.imgur.com/EvisICh.png)
 
 ## Warning
-This is a very early version. 
+This is a early version. 
 You will encounter crashes if you put wrong information 
 in the settings, because there is no input validation.
 
