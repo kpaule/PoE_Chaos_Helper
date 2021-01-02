@@ -28,6 +28,10 @@ namespace PoE_Chaos_Helper
 
         public void PaintItems(List<PoE.Item> items, string tabType)
         {
+            // sort the items into chaos recipe sets.
+            var itemSets = GetItemSets(items);
+
+
             int slots;
             if (tabType == "QuadStash")
                 slots = 24;
@@ -39,24 +43,31 @@ namespace PoE_Chaos_Helper
 
             Bitmap bitmap = new Bitmap(Width, Height);
             Graphics bitmapGraphics = Graphics.FromImage(bitmap);
-            HatchBrush semiTransBrush = new HatchBrush(HatchStyle.Percent50, TransparencyKey, Color.Red);
 
-            foreach (var item in items)
+            int setCount = 0;
+            foreach(var set in itemSets)
             {
-                float itemX = item.x * slotWidth;
-                float itemY = item.y * slotHeight;
-                float itemWidth = item.w * slotWidth;
-                float itemHeight = item.h * slotHeight;
+                Color[] colArr = { Color.Yellow, Color.Red, Color.Purple, Color.DarkBlue, Color.Blue, Color.LightBlue, Color.Cyan, Color.Green, Color.LightGreen, Color.Pink, Color.Beige, Color.Brown, Color.DarkRed, Color.Olive, Color.Orange, Color.Salmon };
 
-                bitmapGraphics.FillRectangle(semiTransBrush, itemX, itemY, itemWidth, itemHeight);
+                HatchBrush semiTransBrush = new HatchBrush(HatchStyle.Percent50, TransparencyKey, colArr[setCount]);
+
+                foreach (PoE.Item item in set.Values)
+                {
+                    float itemX = item.x * slotWidth;
+                    float itemY = item.y * slotHeight;
+                    float itemWidth = item.w * slotWidth;
+                    float itemHeight = item.h * slotHeight;
+
+                    bitmapGraphics.FillRectangle(semiTransBrush, itemX, itemY, itemWidth, itemHeight);
+                }
+
+                if (setCount >= colArr.Length)
+                    setCount = 0;
+                else
+                    setCount++;
             }
 
             BackgroundImage = bitmap;
-        }
-
-        private void PaintItem(PoE.Item item, bool quadTab)
-        {
-
         }
 
         private void FormOverlay_Load(object sender, EventArgs e)
@@ -70,6 +81,85 @@ namespace PoE_Chaos_Helper
             SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
             
             
+        }
+
+        private List<Dictionary<String, PoE.Item>> GetItemSets(List<PoE.Item> items)
+        {
+            List<Dictionary<String, PoE.Item>> matrix = new List<Dictionary<String, PoE.Item>>();
+
+            foreach(var item in items)
+            {
+                string type;
+
+                if (item.icon.Contains("One Hand Swords") || item.icon.Contains("Daggers") || item.icon.Contains("Rune Dagger"))
+                {
+                    type = "OneHanded";
+                }
+                else if (item.icon.Contains("Helmets"))
+                {
+                    type = "Helmets";
+                }
+                else if (item.icon.Contains("BodyArmours"))
+                {
+                    type = "BodyArmours";
+                }
+                else if (item.icon.Contains("Gloves"))
+                {
+                    type = "Gloves";
+                }
+                else if (item.icon.Contains("Boots"))
+                {
+                    type = "Boots";
+                }
+                else if (item.icon.Contains("Belts"))
+                {
+                    type = "Belts";
+                }
+                else if (item.icon.Contains("Amulets"))
+                {
+                    type = "Amulets";
+                }
+                else if (item.icon.Contains("Rings"))
+                {
+                    type = "Rings";
+                }
+                else
+                {
+                    type = "Nothing";
+                }
+
+                bool foundSet = false;
+                foreach (var set in matrix)
+                {
+                    if (!set.ContainsKey(type))
+                    {
+                        set.Add(type, item);
+                        foundSet = true;
+                    }
+                    else
+                    {
+                        // for rings we have to check if there are 2.
+                        if(type == "Rings")
+                        {
+                            if (set.ContainsKey("Rings2") == false)
+                            {
+                                set.Add("Rings2", item);
+                                foundSet = true;
+                            }
+                        }
+                    }
+                }
+
+                if(foundSet == false)
+                {
+                    Dictionary<String, PoE.Item> temp = new Dictionary<string, PoE.Item>();
+                    temp.Add(type, item);
+                    matrix.Add(temp);
+                }
+
+            }
+
+            return matrix;
         }
 
     }

@@ -12,6 +12,7 @@ namespace PoE_Chaos_Helper
 {
     public partial class FormMain : Form
     {
+        PoE.Stash stash;
         FormOverlay formOverlay;
 
         public FormMain()
@@ -28,16 +29,12 @@ namespace PoE_Chaos_Helper
             var filterPath = Properties.Settings.Default.FilterPath;
             var maxSets = Properties.Settings.Default.MaxSets;
 
-            PoE.Stash stash = await getStashAsync(poessid, league, accountName, tabIndex);
+            stash = await getStashAsync(poessid, league, accountName, tabIndex);
 
             if(stash != null)
             {
                 // count items eligible for the chaos recipe
-                List<PoE.Item> eligible = getEligibleForRecipe(stash.items);
-
-                string tabType = stash.tabs.ElementAt(tabIndex).type;
-                if (formOverlay != null)
-                    formOverlay.PaintItems(eligible, tabType);
+                List<PoE.Item>  eligible = getEligibleForRecipe(stash.items);
 
                 int countOneHandedWeapon = countType(eligible, "OneHandWeapons");
                 int countHelmet = countType(eligible, "Helmets");
@@ -149,8 +146,25 @@ namespace PoE_Chaos_Helper
             {
                 formOverlay = new FormOverlay();
                 formOverlay.Show();
-                updateTab();
+
+                if(stash != null)
+                {
+                    var tabIndex = Properties.Settings.Default.TabIndex;
+                    // count items eligible for the chaos recipe
+                    List<PoE.Item> eligible = getEligibleForRecipe(stash.items);
+
+                    string tabType = stash.tabs.ElementAt(tabIndex).type;
+                    formOverlay.PaintItems(eligible, tabType);
+                }
+                else
+                {
+                    MessageBox.Show("No data. ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    formOverlay.Close();
+                    formOverlay = null;
+                }
+
             }
+
             else
             {
                 formOverlay.Close();
