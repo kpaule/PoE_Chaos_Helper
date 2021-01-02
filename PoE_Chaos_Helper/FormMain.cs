@@ -75,7 +75,7 @@ namespace PoE_Chaos_Helper
 
                 // Update GUI
                 textBoxTabName.Text = stash.tabs.ElementAt(tabIndex).n;
-                textBoxOneHandedWeapon.Text = countOneHandedWeapon + " / " + maxSets;
+                textBoxOneHandedWeapon.Text = countOneHandedWeapon + " / " + maxSets * 2;
                 textBoxHelmet.Text = countHelmet + " / " + maxSets;
                 textBoxBodyArmour.Text = countBodyArmour + " / " + maxSets;
                 textBoxGloves.Text = countGloves + " / " + maxSets;
