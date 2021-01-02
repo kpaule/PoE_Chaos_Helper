@@ -29,6 +29,7 @@ namespace PoE_Chaos_Helper
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormOverlay));
             this.SuspendLayout();
             // 
             // FormOverlay
@@ -38,6 +39,7 @@ namespace PoE_Chaos_Helper
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(567, 523);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormOverlay";
             this.Text = "Overlay";
             this.TopMost = true;

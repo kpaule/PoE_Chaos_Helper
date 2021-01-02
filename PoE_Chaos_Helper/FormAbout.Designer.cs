@@ -29,6 +29,7 @@ namespace PoE_Chaos_Helper
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAbout));
             this.richTextBoxAbout = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
@@ -49,6 +50,7 @@ namespace PoE_Chaos_Helper
             this.ClientSize = new System.Drawing.Size(286, 75);
             this.Controls.Add(this.richTextBoxAbout);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormAbout";
             this.Text = "About Chaos Helper";

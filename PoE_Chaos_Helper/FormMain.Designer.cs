@@ -30,6 +30,7 @@ namespace PoE_Chaos_Helper
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.timer = new System.Windows.Forms.Timer(this.components);
             this.buttonStart = new System.Windows.Forms.Button();
             this.textBoxTabName = new System.Windows.Forms.TextBox();
@@ -327,6 +328,7 @@ namespace PoE_Chaos_Helper
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.menuStrip);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.MaximizeBox = false;
             this.Name = "FormMain";

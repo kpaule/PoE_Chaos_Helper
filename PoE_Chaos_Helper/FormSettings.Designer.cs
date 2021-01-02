@@ -30,6 +30,7 @@ namespace PoE_Chaos_Helper
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBoxPoeSessId = new System.Windows.Forms.TextBox();
             this.labelPoeSessId = new System.Windows.Forms.Label();
@@ -239,6 +240,7 @@ namespace PoE_Chaos_Helper
             this.Controls.Add(this.groupBoxUser);
             this.Controls.Add(this.groupBoxOverlay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "FormSettings";
             this.Text = "Settings";
