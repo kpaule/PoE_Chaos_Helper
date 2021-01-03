@@ -32,6 +32,4 @@ You need to prepare your filter, so Chaos Helper can adjust it when needed.
 Add these two tags to your filter and Chaos Helper edits changes between it.
 
 ## TODO
-- Overlay
-- Notification for user to reload the filter
-- Input validation
+- Better input validation
