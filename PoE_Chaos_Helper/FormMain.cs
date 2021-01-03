@@ -22,6 +22,7 @@ namespace PoE_Chaos_Helper
 
         private async void updateTab()
         {
+            // load the settings
             var poessid = Properties.Settings.Default.POESESSID;
             var league = Properties.Settings.Default.League;
             var accountName = Properties.Settings.Default.AccountName;
@@ -29,30 +30,31 @@ namespace PoE_Chaos_Helper
             var filterPath = Properties.Settings.Default.FilterPath;
             var maxSets = Properties.Settings.Default.MaxSets;
 
-            stash = await getStashAsync(poessid, league, accountName, tabIndex);
+            // update from poe api
+            stash = await getStashAsync(poessid, league, accountName, tabIndex); // returns null if failed
 
             if(stash != null)
             {
                 // count items eligible for the chaos recipe
-                List<PoE.Item>  eligible = getEligibleForRecipe(stash.items);
+                List<PoE.Item> eligible = getEligibleForRecipe(stash.items);
 
-                int countOneHandedWeapon = countType(eligible, "OneHandWeapons");
-                int countHelmet = countType(eligible, "Helmets");
-                int countBodyArmour = countType(eligible, "BodyArmours");
-                int countGloves = countType(eligible, "Gloves");
-                int countBoots = countType(eligible, "Boots");
-                int countBelt = countType(eligible, "Belts");
-                int countAmulet = countType(eligible, "Amulets");
-                int countRing = countType(eligible, "Rings");
+                int countOneHandedWeapon = countType(eligible, PoE.ItemType.OneHandWeapons);
+                int countHelmet = countType(eligible, PoE.ItemType.Helmets);
+                int countBodyArmour = countType(eligible, PoE.ItemType.BodyArmours);
+                int countGloves = countType(eligible, PoE.ItemType.Gloves);
+                int countBoots = countType(eligible, PoE.ItemType.Boots);
+                int countBelt = countType(eligible, PoE.ItemType.Belts);
+                int countAmulet = countType(eligible, PoE.ItemType.Amulets);
+                int countRing = countType(eligible, PoE.ItemType.Rings);
 
-                // check whats missing
+                // check whats missing so we can add it to poe item filter
                 List<string> missing = new List<string>();
-                if(countOneHandedWeapon < maxSets * 2)
+                if(countOneHandedWeapon < maxSets * 2) // we need 2 weapons
                 {
                     missing.Add("One Hand Swords");
                     missing.Add("Daggers");
                     missing.Add("Rune Dagger");
-
+                    missing.Add("Wands");
                 }
                 if (countHelmet < maxSets)
                     missing.Add("Helmets");
@@ -66,7 +68,7 @@ namespace PoE_Chaos_Helper
                     missing.Add("Belt");
                 if (countAmulet < maxSets)
                     missing.Add("Amulets");
-                if (countRing < (maxSets * 2))
+                if (countRing < (maxSets * 2)) // we need 2 rings
                     missing.Add("Rings");
 
                 // do filter here
@@ -106,20 +108,17 @@ namespace PoE_Chaos_Helper
             return tcs.Task;
         }
 
-        private int countType(List<PoE.Item> items, string type)
+        private int countType(List<PoE.Item> items, PoE.ItemType itemType)
         {
             int count = 0;
 
             foreach (var item in items)
             {
-                // this is not nice
-                if (item.icon.Contains(type))
+                if (item.ItemType == itemType)
                 {
                     count++;
                 }
-
             }
-
             return count;
         }
 
@@ -129,19 +128,18 @@ namespace PoE_Chaos_Helper
 
             foreach (var item in items)
             {
-
-                if (item.identified == false && item.ilvl >= 60 && item.ilvl <= 74)
+                if (item.identified == false && item.ilvl >= 60 && item.ilvl <= 74 && item.ItemType != PoE.ItemType.NotImplemented)
                 {
                     eligible.Add(item);
                 }
-
             }
-
             return eligible;
         }
 
+        #region Events
         private void overlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Overlay is not open -> create it
             if (formOverlay == null)
             {
                 formOverlay = new FormOverlay();
@@ -150,10 +148,13 @@ namespace PoE_Chaos_Helper
                 if(stash != null)
                 {
                     var tabIndex = Properties.Settings.Default.TabIndex;
-                    // count items eligible for the chaos recipe
+                    // get items eligible for the chaos recipe
                     List<PoE.Item> eligible = getEligibleForRecipe(stash.items);
 
+                    // what is the stash tab type?
                     string tabType = stash.tabs.ElementAt(tabIndex).type;
+
+                    // tell Overlay Form to paint 'eligible' items in tab 'tabType'
                     formOverlay.PaintItems(eligible, tabType);
                 }
                 else
@@ -164,7 +165,7 @@ namespace PoE_Chaos_Helper
                 }
 
             }
-
+            // Overlay is open -> remove it
             else
             {
                 formOverlay.Close();
@@ -203,5 +204,7 @@ namespace PoE_Chaos_Helper
             FormAbout formAbout = new FormAbout();
             formAbout.Show();
         }
+        #endregion
+
     }
 }

@@ -17,11 +17,13 @@ namespace PoE_Chaos_Helper
             InitializeComponent();
         }
 
+        #region Events
         private void FormAbout_Load(object sender, EventArgs e)
         {
             richTextBoxAbout.Text = "Chaos Helper\n" +
                 "v1.1\n" +
                 "https://github.com/kpaule/PoE_Chaos_Helper\n";
         }
+        #endregion
     }
 }

@@ -19,6 +19,7 @@ namespace PoE_Chaos_Helper
             InitializeComponent();
         }
 
+        #region Events
         private void FormSettings_Load(object sender, EventArgs e)
         {
             textBoxPoeSessId.Text = Properties.Settings.Default.POESESSID;
@@ -66,5 +67,6 @@ namespace PoE_Chaos_Helper
                 textBoxFilterPath.Text = filter;
             }
         }
+        #endregion
     }
 }

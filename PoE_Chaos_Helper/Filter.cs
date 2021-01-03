@@ -37,25 +37,26 @@ namespace PoE_Chaos_Helper
                 Properties.Settings.Default.FilterClasses = filterClasses;
                 Properties.Settings.Default.Save();
 
-                //MessageBox.Show("Filter changed, pls refresh!", "Alert");
+                MessageBox.Show("Filter changed, pls refresh!", "Alert", MessageBoxButtons.OK);
             }
 
-            // preventing empty Class in filter
+            // preventing edge case: empty Class in filter
             if (filterClasses.Count == 0)
                 template = "";
 
+            // build class string
             string filterClassStr = "Class ";
             foreach (var filterClass in filterClasses)
             {
                 filterClassStr += String.Format("\"{0}\" ", filterClass);
             }
 
+            // read the specified filter text
             List<string> filterFileLines = new List<string>(System.IO.File.ReadAllLines(Properties.Settings.Default.FilterPath));
-
 
             int lineStart = -1;
             int lineStop = -1;
-
+            // search for 'start' and 'stop' stop tags ...
             for (int i = 0; i < filterFileLines.Count; i++)
             {
                 string line = filterFileLines[i];
@@ -69,7 +70,7 @@ namespace PoE_Chaos_Helper
                     lineStop = i;
                 }
             }
-
+            // ... if found both ...
             if(lineStart != -1 && lineStop != -1)
             {
                 for (int i = lineStop; i > lineStart - 1; i--)
@@ -77,6 +78,7 @@ namespace PoE_Chaos_Helper
                     filterFileLines.RemoveAt(i);
                 }
 
+                // ... write template between
                 filterFileLines.InsertRange(lineStart, new List<string> { start, String.Format(template, filterClassStr), stop });
 
                 System.IO.File.WriteAllLines(path, filterFileLines);

@@ -20,7 +20,6 @@ namespace PoE_Chaos_Helper
         [DllImport("user32.dll")]
         static extern int SetWindowLong(IntPtr hWnd, int nIndex, UInt32 dwNewLong);
 
-
         public FormOverlay()
         {
             InitializeComponent();
@@ -73,28 +72,15 @@ namespace PoE_Chaos_Helper
             BackgroundImage = bitmap;
         }
 
-        private void FormOverlay_Load(object sender, EventArgs e)
-        {
-            Location = Properties.Settings.Default.OverlayLocation;
-            Size = Properties.Settings.Default.OverlaySize;
-
-            // make click through
-            
-            uint initialStyle = GetWindowLong(this.Handle, -20);
-            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
-            
-            
-        }
-
         private List<Dictionary<String, PoE.Item>> GetItemSets(List<PoE.Item> items)
         {
             List<Dictionary<String, PoE.Item>> matrix = new List<Dictionary<String, PoE.Item>>();
 
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 string type;
 
-                if ( item.icon.Contains("Wands") || item.icon.Contains("OneHandSwords") || item.icon.Contains("Daggers"))
+                if (item.icon.Contains("Wands") || item.icon.Contains("OneHandSwords") || item.icon.Contains("Daggers"))
                 {
                     type = "OneHanded";
                 }
@@ -131,7 +117,7 @@ namespace PoE_Chaos_Helper
                     type = "Nothing";
                 }
 
-                if(type != "Nothing")
+                if (type != "Nothing")
                 {
                     bool foundSet = false;
                     foreach (var set in matrix)
@@ -155,7 +141,7 @@ namespace PoE_Chaos_Helper
                                     break;
                                 }
                             }
-                            else if(type == "OneHanded")
+                            else if (type == "OneHanded")
                             {
                                 if (set.ContainsKey("OneHanded2") == false)
                                 {
@@ -180,16 +166,31 @@ namespace PoE_Chaos_Helper
 
             for (int i = matrix.Count; i > 0; i--)
             {
-                var set = matrix.ElementAt(i-1);
+                var set = matrix.ElementAt(i - 1);
 
                 if (set.Count < 10)
                 {
-                    matrix.RemoveAt(i-1);
+                    matrix.RemoveAt(i - 1);
                 }
             }
 
             return matrix;
         }
+
+        #region Events
+        private void FormOverlay_Load(object sender, EventArgs e)
+        {
+            Location = Properties.Settings.Default.OverlayLocation;
+            Size = Properties.Settings.Default.OverlaySize;
+
+            // make click through
+            
+            uint initialStyle = GetWindowLong(this.Handle, -20);
+            SetWindowLong(this.Handle, -20, initialStyle | 0x80000 | 0x20);
+            
+            
+        }
+        #endregion
 
     }
 }
