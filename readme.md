@@ -8,8 +8,7 @@
 
 ## Warning
 This is a early version. 
-You will encounter crashes if you put wrong information 
-in the settings, because there is no input validation.
+You might encounter crashes.
 
 ## Download
 Download the latest release [here](https://github.com/kpaule/PoE_Chaos_Helper/releases).
