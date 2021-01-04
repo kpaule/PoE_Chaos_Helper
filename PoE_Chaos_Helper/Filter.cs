@@ -11,34 +11,15 @@ namespace PoE_Chaos_Helper
     {
         private string start = "# Chaos Helper - Start #";
         private string stop = "# Chaos Helper - Stop #";
-        private string template = "Show\n" +
-            "SetBorderColor 50 130 165 255\n" +
-            "SetFontSize 45\n" +
-            "SetTextColor 50 130 165 255\n" +
-            "SetBackgroundColor 255 255 255 255\n" +
-            "PlayAlertSound 1 300\n" +
-            "PlayEffect Red\n" +
-            "MinimapIcon 0 Red Cross\n" +
-            "ItemLevel >= 60\n" +
-            "Rarity = Rare\n" +
-            "{0}\n" +
-            "Identified False\n" +
-            "ItemLevel <= 74";
+        private string template;
 
         public void Modify(string path, List<string> filterClasses)
         {
-            var oldFilterClasses = Properties.Settings.Default.FilterClasses;
-
-            // if nothing changed, we don't have to change to filter
-            if (oldFilterClasses != null && oldFilterClasses.SequenceEqual(filterClasses))
-                return;
-            else
-            {
-                Properties.Settings.Default.FilterClasses = filterClasses;
-                Properties.Settings.Default.Save();
-
-                MessageBox.Show("Filter changed, pls refresh!", "Alert", MessageBoxButtons.OK);
-            }
+            // convert saveable collection to string
+            var filterTemplateCollection = Properties.Settings.Default.FilterTemplate;
+            var filterTemplateList = filterTemplateCollection.Cast<string>().ToList();
+            template = string.Join(Environment.NewLine, filterTemplateList);
+            template += Environment.NewLine + "{0}";
 
             // preventing edge case: empty Class in filter
             if (filterClasses.Count == 0)
@@ -56,7 +37,7 @@ namespace PoE_Chaos_Helper
 
             int lineStart = -1;
             int lineStop = -1;
-            // search for 'start' and 'stop' stop tags ...
+            // search for 'start' and 'stop' stop tags
             for (int i = 0; i < filterFileLines.Count; i++)
             {
                 string line = filterFileLines[i];
@@ -70,18 +51,41 @@ namespace PoE_Chaos_Helper
                     lineStop = i;
                 }
             }
-            // ... if found both ...
+
+            // both start and stop tags exist
             if(lineStart != -1 && lineStop != -1)
             {
-                for (int i = lineStop; i > lineStart - 1; i--)
+                // check if we have to write an update
+                bool updateRequired = true;
+                for (int i = lineStart; i < lineStop; i++)
                 {
-                    filterFileLines.RemoveAt(i);
+                    var currLine = filterFileLines[i];
+                    if (currLine.Contains(filterClassStr))
+                    {
+                        updateRequired = false;
+                    }
                 }
 
-                // ... write template between
-                filterFileLines.InsertRange(lineStart, new List<string> { start, String.Format(template, filterClassStr), stop });
+                if (updateRequired)
+                {
+                    // delete existing lines
+                    for (int i = lineStop; i > lineStart - 1; i--)
+                    {
+                        filterFileLines.RemoveAt(i);
+                    }
 
-                System.IO.File.WriteAllLines(path, filterFileLines);
+                    // write template between tags
+                    filterFileLines.InsertRange(lineStart, new List<string> { start, String.Format(template, filterClassStr), stop });
+
+                    System.IO.File.WriteAllLines(path, filterFileLines);
+
+                    MessageBox.Show("Filter changed, pls refresh!", "Alert", MessageBoxButtons.OK);
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("Can't find start and stop tags. Please adjust your filter.", "Alert", MessageBoxButtons.OK);
             }
 
         }

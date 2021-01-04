@@ -31,7 +31,6 @@ namespace PoE_Chaos_Helper
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormSettings));
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.textBoxPoeSessId = new System.Windows.Forms.TextBox();
             this.labelPoeSessId = new System.Windows.Forms.Label();
             this.labelLeague = new System.Windows.Forms.Label();
@@ -51,15 +50,21 @@ namespace PoE_Chaos_Helper
             this.groupBoxOverlay = new System.Windows.Forms.GroupBox();
             this.groupBoxUser = new System.Windows.Forms.GroupBox();
             this.groupBoxChaosRecipe = new System.Windows.Forms.GroupBox();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.groupBoxFilter = new System.Windows.Forms.GroupBox();
+            this.labelBorder = new System.Windows.Forms.Label();
+            this.radioButtonShow = new System.Windows.Forms.RadioButton();
+            this.radioButtonHide = new System.Windows.Forms.RadioButton();
+            this.textBoxFilterTemplate = new System.Windows.Forms.TextBox();
+            this.labelFilterTemplate = new System.Windows.Forms.Label();
+            this.contextMenuStripReset = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOverlay.SuspendLayout();
             this.groupBoxUser.SuspendLayout();
             this.groupBoxChaosRecipe.SuspendLayout();
+            this.groupBoxFilter.SuspendLayout();
+            this.contextMenuStripReset.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // textBoxPoeSessId
             // 
@@ -144,15 +149,15 @@ namespace PoE_Chaos_Helper
             // labelFilterPath
             // 
             this.labelFilterPath.AutoSize = true;
-            this.labelFilterPath.Location = new System.Drawing.Point(6, 68);
+            this.labelFilterPath.Location = new System.Drawing.Point(6, 16);
             this.labelFilterPath.Name = "labelFilterPath";
-            this.labelFilterPath.Size = new System.Drawing.Size(56, 13);
+            this.labelFilterPath.Size = new System.Drawing.Size(32, 13);
             this.labelFilterPath.TabIndex = 13;
-            this.labelFilterPath.Text = "Filter path:";
+            this.labelFilterPath.Text = "Path:";
             // 
             // textBoxFilterPath
             // 
-            this.textBoxFilterPath.Location = new System.Drawing.Point(93, 65);
+            this.textBoxFilterPath.Location = new System.Drawing.Point(66, 13);
             this.textBoxFilterPath.Name = "textBoxFilterPath";
             this.textBoxFilterPath.Size = new System.Drawing.Size(173, 20);
             this.textBoxFilterPath.TabIndex = 12;
@@ -169,6 +174,7 @@ namespace PoE_Chaos_Helper
             // 
             // textBoxOverlayLocation
             // 
+            this.textBoxOverlayLocation.ContextMenuStrip = this.contextMenuStripReset;
             this.textBoxOverlayLocation.Location = new System.Drawing.Point(93, 13);
             this.textBoxOverlayLocation.Name = "textBoxOverlayLocation";
             this.textBoxOverlayLocation.Size = new System.Drawing.Size(173, 20);
@@ -185,6 +191,7 @@ namespace PoE_Chaos_Helper
             // 
             // textBoxOverlaySize
             // 
+            this.textBoxOverlaySize.ContextMenuStrip = this.contextMenuStripReset;
             this.textBoxOverlaySize.Location = new System.Drawing.Point(93, 39);
             this.textBoxOverlaySize.Name = "textBoxOverlaySize";
             this.textBoxOverlaySize.Size = new System.Drawing.Size(173, 20);
@@ -192,13 +199,16 @@ namespace PoE_Chaos_Helper
             // 
             // groupBoxOverlay
             // 
+            this.groupBoxOverlay.Controls.Add(this.radioButtonHide);
+            this.groupBoxOverlay.Controls.Add(this.radioButtonShow);
+            this.groupBoxOverlay.Controls.Add(this.labelBorder);
             this.groupBoxOverlay.Controls.Add(this.labelOverlayLocation);
             this.groupBoxOverlay.Controls.Add(this.labelOverlaySize);
             this.groupBoxOverlay.Controls.Add(this.textBoxOverlayLocation);
             this.groupBoxOverlay.Controls.Add(this.textBoxOverlaySize);
-            this.groupBoxOverlay.Location = new System.Drawing.Point(12, 216);
+            this.groupBoxOverlay.Location = new System.Drawing.Point(12, 185);
             this.groupBoxOverlay.Name = "groupBoxOverlay";
-            this.groupBoxOverlay.Size = new System.Drawing.Size(276, 67);
+            this.groupBoxOverlay.Size = new System.Drawing.Size(276, 89);
             this.groupBoxOverlay.TabIndex = 18;
             this.groupBoxOverlay.TabStop = false;
             this.groupBoxOverlay.Text = "Overlay";
@@ -224,18 +234,105 @@ namespace PoE_Chaos_Helper
             this.groupBoxChaosRecipe.Controls.Add(this.labelTabIndex);
             this.groupBoxChaosRecipe.Controls.Add(this.textBoxMaxSets);
             this.groupBoxChaosRecipe.Controls.Add(this.labelMaxSets);
-            this.groupBoxChaosRecipe.Controls.Add(this.labelFilterPath);
-            this.groupBoxChaosRecipe.Controls.Add(this.textBoxFilterPath);
             this.groupBoxChaosRecipe.Location = new System.Drawing.Point(12, 112);
             this.groupBoxChaosRecipe.Name = "groupBoxChaosRecipe";
-            this.groupBoxChaosRecipe.Size = new System.Drawing.Size(276, 98);
+            this.groupBoxChaosRecipe.Size = new System.Drawing.Size(276, 67);
             this.groupBoxChaosRecipe.TabIndex = 20;
             this.groupBoxChaosRecipe.TabStop = false;
             this.groupBoxChaosRecipe.Text = "Chaos recipe";
             // 
+            // buttonSave
+            // 
+            this.buttonSave.Location = new System.Drawing.Point(537, 280);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(75, 23);
+            this.buttonSave.TabIndex = 21;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // groupBoxFilter
+            // 
+            this.groupBoxFilter.Controls.Add(this.labelFilterTemplate);
+            this.groupBoxFilter.Controls.Add(this.textBoxFilterTemplate);
+            this.groupBoxFilter.Controls.Add(this.labelFilterPath);
+            this.groupBoxFilter.Controls.Add(this.textBoxFilterPath);
+            this.groupBoxFilter.Location = new System.Drawing.Point(294, 12);
+            this.groupBoxFilter.Name = "groupBoxFilter";
+            this.groupBoxFilter.Size = new System.Drawing.Size(318, 262);
+            this.groupBoxFilter.TabIndex = 22;
+            this.groupBoxFilter.TabStop = false;
+            this.groupBoxFilter.Text = "Filter";
+            // 
+            // labelBorder
+            // 
+            this.labelBorder.AutoSize = true;
+            this.labelBorder.Location = new System.Drawing.Point(6, 68);
+            this.labelBorder.Name = "labelBorder";
+            this.labelBorder.Size = new System.Drawing.Size(41, 13);
+            this.labelBorder.TabIndex = 19;
+            this.labelBorder.Text = "Border:";
+            // 
+            // radioButtonShow
+            // 
+            this.radioButtonShow.AutoSize = true;
+            this.radioButtonShow.Checked = true;
+            this.radioButtonShow.Location = new System.Drawing.Point(93, 66);
+            this.radioButtonShow.Name = "radioButtonShow";
+            this.radioButtonShow.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonShow.TabIndex = 20;
+            this.radioButtonShow.TabStop = true;
+            this.radioButtonShow.Text = "Show";
+            this.radioButtonShow.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonHide
+            // 
+            this.radioButtonHide.AutoSize = true;
+            this.radioButtonHide.Location = new System.Drawing.Point(151, 66);
+            this.radioButtonHide.Name = "radioButtonHide";
+            this.radioButtonHide.Size = new System.Drawing.Size(47, 17);
+            this.radioButtonHide.TabIndex = 21;
+            this.radioButtonHide.Text = "Hide";
+            this.radioButtonHide.UseVisualStyleBackColor = true;
+            // 
+            // textBoxFilterTemplate
+            // 
+            this.textBoxFilterTemplate.ContextMenuStrip = this.contextMenuStripReset;
+            this.textBoxFilterTemplate.Location = new System.Drawing.Point(66, 39);
+            this.textBoxFilterTemplate.Multiline = true;
+            this.textBoxFilterTemplate.Name = "textBoxFilterTemplate";
+            this.textBoxFilterTemplate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBoxFilterTemplate.Size = new System.Drawing.Size(243, 215);
+            this.textBoxFilterTemplate.TabIndex = 14;
+            // 
+            // labelFilterTemplate
+            // 
+            this.labelFilterTemplate.AutoSize = true;
+            this.labelFilterTemplate.Location = new System.Drawing.Point(6, 42);
+            this.labelFilterTemplate.Name = "labelFilterTemplate";
+            this.labelFilterTemplate.Size = new System.Drawing.Size(54, 13);
+            this.labelFilterTemplate.TabIndex = 15;
+            this.labelFilterTemplate.Text = "Template:";
+            // 
+            // contextMenuStripReset
+            // 
+            this.contextMenuStripReset.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetToolStripMenuItem});
+            this.contextMenuStripReset.Name = "contextMenuStripReset";
+            this.contextMenuStripReset.Size = new System.Drawing.Size(103, 26);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
             // FormSettings
             // 
-            this.ClientSize = new System.Drawing.Size(298, 291);
+            this.ClientSize = new System.Drawing.Size(617, 308);
+            this.Controls.Add(this.groupBoxFilter);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBoxChaosRecipe);
             this.Controls.Add(this.groupBoxUser);
             this.Controls.Add(this.groupBoxOverlay);
@@ -244,7 +341,6 @@ namespace PoE_Chaos_Helper
             this.MaximizeBox = false;
             this.Name = "FormSettings";
             this.Text = "Settings";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormSettings_FormClosing);
             this.Load += new System.EventHandler(this.FormSettings_Load);
             this.groupBoxOverlay.ResumeLayout(false);
             this.groupBoxOverlay.PerformLayout();
@@ -252,13 +348,14 @@ namespace PoE_Chaos_Helper
             this.groupBoxUser.PerformLayout();
             this.groupBoxChaosRecipe.ResumeLayout(false);
             this.groupBoxChaosRecipe.PerformLayout();
+            this.groupBoxFilter.ResumeLayout(false);
+            this.groupBoxFilter.PerformLayout();
+            this.contextMenuStripReset.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.TextBox textBoxPoeSessId;
         private System.Windows.Forms.Label labelPoeSessId;
         private System.Windows.Forms.Label labelLeague;
@@ -278,5 +375,14 @@ namespace PoE_Chaos_Helper
         private System.Windows.Forms.GroupBox groupBoxOverlay;
         private System.Windows.Forms.GroupBox groupBoxUser;
         private System.Windows.Forms.GroupBox groupBoxChaosRecipe;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.RadioButton radioButtonHide;
+        private System.Windows.Forms.RadioButton radioButtonShow;
+        private System.Windows.Forms.Label labelBorder;
+        private System.Windows.Forms.GroupBox groupBoxFilter;
+        private System.Windows.Forms.Label labelFilterTemplate;
+        private System.Windows.Forms.TextBox textBoxFilterTemplate;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripReset;
+        private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
     }
 }

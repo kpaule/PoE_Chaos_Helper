@@ -97,17 +97,6 @@ namespace PoE_Chaos_Helper.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        public global::System.Collections.Generic.List<System.String> FilterClasses {
-            get {
-                return ((global::System.Collections.Generic.List<System.String>)(this["FilterClasses"]));
-            }
-            set {
-                this["FilterClasses"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("16, 126")]
         public global::System.Drawing.Point OverlayLocation {
             get {
@@ -127,6 +116,32 @@ namespace PoE_Chaos_Helper.Properties {
             }
             set {
                 this["OverlaySize"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<ArrayOfString xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"">
+  <string>Show</string>
+  <string>SetBorderColor 50 130 165 255</string>
+  <string>SetFontSize 45</string>
+  <string>SetTextColor 50 130 165 255</string>
+  <string>SetBackgroundColor 255 255 255 255</string>
+  <string>PlayAlertSound 1 300</string>
+  <string>PlayEffect Red</string>
+  <string>MinimapIcon 0 Red Cross</string>
+  <string>Rarity = Rare</string>
+  <string>Identified False</string>
+  <string>ItemLevel &gt;= 60</string>
+  <string>ItemLevel &lt;= 74</string>
+</ArrayOfString>")]
+        public global::System.Collections.Specialized.StringCollection FilterTemplate {
+            get {
+                return ((global::System.Collections.Specialized.StringCollection)(this["FilterTemplate"]));
+            }
+            set {
+                this["FilterTemplate"] = value;
             }
         }
     }

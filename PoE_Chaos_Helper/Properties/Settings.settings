@@ -20,14 +20,28 @@
     <Setting Name="FilterPath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="FilterClasses" Type="System.Collections.Generic.List&lt;System.String&gt;" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="OverlayLocation" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">16, 126</Value>
     </Setting>
     <Setting Name="OverlaySize" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)">635, 635</Value>
+    </Setting>
+    <Setting Name="FilterTemplate" Type="System.Collections.Specialized.StringCollection" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;string&gt;Show&lt;/string&gt;
+  &lt;string&gt;SetBorderColor 50 130 165 255&lt;/string&gt;
+  &lt;string&gt;SetFontSize 45&lt;/string&gt;
+  &lt;string&gt;SetTextColor 50 130 165 255&lt;/string&gt;
+  &lt;string&gt;SetBackgroundColor 255 255 255 255&lt;/string&gt;
+  &lt;string&gt;PlayAlertSound 1 300&lt;/string&gt;
+  &lt;string&gt;PlayEffect Red&lt;/string&gt;
+  &lt;string&gt;MinimapIcon 0 Red Cross&lt;/string&gt;
+  &lt;string&gt;Rarity = Rare&lt;/string&gt;
+  &lt;string&gt;Identified False&lt;/string&gt;
+  &lt;string&gt;ItemLevel &amp;gt;= 60&lt;/string&gt;
+  &lt;string&gt;ItemLevel &amp;lt;= 74&lt;/string&gt;
+&lt;/ArrayOfString&gt;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

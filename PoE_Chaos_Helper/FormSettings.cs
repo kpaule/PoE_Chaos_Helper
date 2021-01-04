@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -28,13 +29,27 @@ namespace PoE_Chaos_Helper
             textBoxTabIndex.Text = Properties.Settings.Default.TabIndex.ToString();
             textBoxMaxSets.Text = Properties.Settings.Default.MaxSets.ToString();
             textBoxFilterPath.Text = Properties.Settings.Default.FilterPath;
-
-
             textBoxOverlayLocation.Text = Properties.Settings.Default.OverlayLocation.ToString();
             textBoxOverlaySize.Text = Properties.Settings.Default.OverlaySize.ToString();
+
+            // convert saveable collection to string
+            var filterTemplateCollection = Properties.Settings.Default.FilterTemplate;
+            var filterTemplateList = filterTemplateCollection.Cast<string>().ToList();
+            textBoxFilterTemplate.Text = string.Join(Environment.NewLine, filterTemplateList);
         }
 
-        private void FormSettings_FormClosing(object sender, FormClosingEventArgs e)
+        private void textBoxFilterPath_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Title = "Select your Filter";
+            openFileDialog.Filter = "Filter Files (*.filter)|*.filter";
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                string filter = openFileDialog.FileName;
+                textBoxFilterPath.Text = filter;
+            }
+        }
+        private void buttonSave_Click(object sender, EventArgs e)
         {
             Properties.Settings.Default.POESESSID = textBoxPoeSessId.Text;
             Properties.Settings.Default.League = textBoxLeague.Text;
@@ -53,20 +68,50 @@ namespace PoE_Chaos_Helper
             Size size = new Size(int.Parse(p[0]), int.Parse(p[1]));
             Properties.Settings.Default.OverlaySize = size;
 
+            // convert string to saveable collection 
+            var filterTemplateText = textBoxFilterTemplate.Text;
+            string[] filterTemplateLines = filterTemplateText.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            StringCollection filterTemplateColl = new StringCollection();
+            filterTemplateColl.AddRange(filterTemplateLines);
+            Properties.Settings.Default.FilterTemplate = filterTemplateColl;
+
+
             Properties.Settings.Default.Save();
         }
 
-        private void textBoxFilterPath_Click(object sender, EventArgs e)
+        private void resetToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Title = "Select your Filter";
-            openFileDialog.Filter = "Filter Files (*.filter)|*.filter";
-            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            var menuItem = sender as ToolStripMenuItem;
+            var contextMenu = menuItem.GetCurrentParent() as ContextMenuStrip;
+            var textBox = contextMenu.SourceControl;
+
+            if(textBox == textBoxFilterTemplate)
             {
-                string filter = openFileDialog.FileName;
-                textBoxFilterPath.Text = filter;
+                textBox.Text = "Show" + Environment.NewLine +
+                    "SetBorderColor 50 130 165 255" + Environment.NewLine +
+                    "SetFontSize 45" + Environment.NewLine +
+                    "SetTextColor 50 130 165 255" + Environment.NewLine +
+                    "SetBackgroundColor 255 255 255 255" + Environment.NewLine +
+                    "PlayAlertSound 1 300" + Environment.NewLine +
+                    "PlayEffect Red" + Environment.NewLine +
+                    "MinimapIcon 0 Red Cross" + Environment.NewLine +
+                    "Rarity = Rare" + Environment.NewLine +
+                    "Identified False" + Environment.NewLine +
+                    "ItemLevel >= 60" + Environment.NewLine +
+                    "ItemLevel <= 74";
             }
+            else if(textBox == textBoxOverlayLocation)
+            {
+                textBox.Text = "{X=16,Y=126}";
+            }
+            else if (textBox == textBoxOverlaySize)
+            {
+                textBox.Text = "{Width=635, Height=635}";
+            }
+
         }
+
         #endregion
+
     }
 }
