@@ -2,6 +2,7 @@
 - Automatically adjusts item filter with customizable template
 - Notification when item filter has to be refreshed.
 - Highlights full chaos recipe items with overlay
+- Customizable hotkey for overlay
 - Can be configured for every resolution
 - User Friendly settings
 
@@ -33,4 +34,3 @@ Add these two tags to your filter and Chaos Helper edits changes between it.
 
 ## TODO
 - Better input validation
-- Add customizable hotkey for overlay
