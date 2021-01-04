@@ -45,25 +45,27 @@ namespace PoE_Chaos_Helper
             this.textBoxFilterPath = new System.Windows.Forms.TextBox();
             this.labelOverlayLocation = new System.Windows.Forms.Label();
             this.textBoxOverlayLocation = new System.Windows.Forms.TextBox();
+            this.contextMenuStripReset = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.labelOverlaySize = new System.Windows.Forms.Label();
             this.textBoxOverlaySize = new System.Windows.Forms.TextBox();
             this.groupBoxOverlay = new System.Windows.Forms.GroupBox();
+            this.radioButtonHide = new System.Windows.Forms.RadioButton();
+            this.radioButtonShow = new System.Windows.Forms.RadioButton();
+            this.labelBorder = new System.Windows.Forms.Label();
             this.groupBoxUser = new System.Windows.Forms.GroupBox();
             this.groupBoxChaosRecipe = new System.Windows.Forms.GroupBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.groupBoxFilter = new System.Windows.Forms.GroupBox();
-            this.labelBorder = new System.Windows.Forms.Label();
-            this.radioButtonShow = new System.Windows.Forms.RadioButton();
-            this.radioButtonHide = new System.Windows.Forms.RadioButton();
-            this.textBoxFilterTemplate = new System.Windows.Forms.TextBox();
             this.labelFilterTemplate = new System.Windows.Forms.Label();
-            this.contextMenuStripReset = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.resetToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxFilterTemplate = new System.Windows.Forms.TextBox();
+            this.labelOverlayHotkey = new System.Windows.Forms.Label();
+            this.textBoxOverlayHotkey = new System.Windows.Forms.TextBox();
+            this.contextMenuStripReset.SuspendLayout();
             this.groupBoxOverlay.SuspendLayout();
             this.groupBoxUser.SuspendLayout();
             this.groupBoxChaosRecipe.SuspendLayout();
             this.groupBoxFilter.SuspendLayout();
-            this.contextMenuStripReset.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBoxPoeSessId
@@ -180,6 +182,20 @@ namespace PoE_Chaos_Helper
             this.textBoxOverlayLocation.Size = new System.Drawing.Size(173, 20);
             this.textBoxOverlayLocation.TabIndex = 14;
             // 
+            // contextMenuStripReset
+            // 
+            this.contextMenuStripReset.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.resetToolStripMenuItem});
+            this.contextMenuStripReset.Name = "contextMenuStripReset";
+            this.contextMenuStripReset.Size = new System.Drawing.Size(103, 26);
+            // 
+            // resetToolStripMenuItem
+            // 
+            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
+            this.resetToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
+            this.resetToolStripMenuItem.Text = "Reset";
+            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            // 
             // labelOverlaySize
             // 
             this.labelOverlaySize.AutoSize = true;
@@ -199,6 +215,8 @@ namespace PoE_Chaos_Helper
             // 
             // groupBoxOverlay
             // 
+            this.groupBoxOverlay.Controls.Add(this.labelOverlayHotkey);
+            this.groupBoxOverlay.Controls.Add(this.textBoxOverlayHotkey);
             this.groupBoxOverlay.Controls.Add(this.radioButtonHide);
             this.groupBoxOverlay.Controls.Add(this.radioButtonShow);
             this.groupBoxOverlay.Controls.Add(this.labelBorder);
@@ -208,10 +226,41 @@ namespace PoE_Chaos_Helper
             this.groupBoxOverlay.Controls.Add(this.textBoxOverlaySize);
             this.groupBoxOverlay.Location = new System.Drawing.Point(12, 185);
             this.groupBoxOverlay.Name = "groupBoxOverlay";
-            this.groupBoxOverlay.Size = new System.Drawing.Size(276, 89);
+            this.groupBoxOverlay.Size = new System.Drawing.Size(276, 118);
             this.groupBoxOverlay.TabIndex = 18;
             this.groupBoxOverlay.TabStop = false;
             this.groupBoxOverlay.Text = "Overlay";
+            // 
+            // radioButtonHide
+            // 
+            this.radioButtonHide.AutoSize = true;
+            this.radioButtonHide.Checked = true;
+            this.radioButtonHide.Location = new System.Drawing.Point(151, 66);
+            this.radioButtonHide.Name = "radioButtonHide";
+            this.radioButtonHide.Size = new System.Drawing.Size(47, 17);
+            this.radioButtonHide.TabIndex = 21;
+            this.radioButtonHide.TabStop = true;
+            this.radioButtonHide.Text = "Hide";
+            this.radioButtonHide.UseVisualStyleBackColor = true;
+            // 
+            // radioButtonShow
+            // 
+            this.radioButtonShow.AutoSize = true;
+            this.radioButtonShow.Location = new System.Drawing.Point(93, 66);
+            this.radioButtonShow.Name = "radioButtonShow";
+            this.radioButtonShow.Size = new System.Drawing.Size(52, 17);
+            this.radioButtonShow.TabIndex = 20;
+            this.radioButtonShow.Text = "Show";
+            this.radioButtonShow.UseVisualStyleBackColor = true;
+            // 
+            // labelBorder
+            // 
+            this.labelBorder.AutoSize = true;
+            this.labelBorder.Location = new System.Drawing.Point(6, 68);
+            this.labelBorder.Name = "labelBorder";
+            this.labelBorder.Size = new System.Drawing.Size(41, 13);
+            this.labelBorder.TabIndex = 19;
+            this.labelBorder.Text = "Border:";
             // 
             // groupBoxUser
             // 
@@ -264,36 +313,14 @@ namespace PoE_Chaos_Helper
             this.groupBoxFilter.TabStop = false;
             this.groupBoxFilter.Text = "Filter";
             // 
-            // labelBorder
+            // labelFilterTemplate
             // 
-            this.labelBorder.AutoSize = true;
-            this.labelBorder.Location = new System.Drawing.Point(6, 68);
-            this.labelBorder.Name = "labelBorder";
-            this.labelBorder.Size = new System.Drawing.Size(41, 13);
-            this.labelBorder.TabIndex = 19;
-            this.labelBorder.Text = "Border:";
-            // 
-            // radioButtonShow
-            // 
-            this.radioButtonShow.AutoSize = true;
-            this.radioButtonShow.Checked = true;
-            this.radioButtonShow.Location = new System.Drawing.Point(93, 66);
-            this.radioButtonShow.Name = "radioButtonShow";
-            this.radioButtonShow.Size = new System.Drawing.Size(52, 17);
-            this.radioButtonShow.TabIndex = 20;
-            this.radioButtonShow.TabStop = true;
-            this.radioButtonShow.Text = "Show";
-            this.radioButtonShow.UseVisualStyleBackColor = true;
-            // 
-            // radioButtonHide
-            // 
-            this.radioButtonHide.AutoSize = true;
-            this.radioButtonHide.Location = new System.Drawing.Point(151, 66);
-            this.radioButtonHide.Name = "radioButtonHide";
-            this.radioButtonHide.Size = new System.Drawing.Size(47, 17);
-            this.radioButtonHide.TabIndex = 21;
-            this.radioButtonHide.Text = "Hide";
-            this.radioButtonHide.UseVisualStyleBackColor = true;
+            this.labelFilterTemplate.AutoSize = true;
+            this.labelFilterTemplate.Location = new System.Drawing.Point(6, 42);
+            this.labelFilterTemplate.Name = "labelFilterTemplate";
+            this.labelFilterTemplate.Size = new System.Drawing.Size(54, 13);
+            this.labelFilterTemplate.TabIndex = 15;
+            this.labelFilterTemplate.Text = "Template:";
             // 
             // textBoxFilterTemplate
             // 
@@ -305,32 +332,26 @@ namespace PoE_Chaos_Helper
             this.textBoxFilterTemplate.Size = new System.Drawing.Size(243, 215);
             this.textBoxFilterTemplate.TabIndex = 14;
             // 
-            // labelFilterTemplate
+            // labelOverlayHotkey
             // 
-            this.labelFilterTemplate.AutoSize = true;
-            this.labelFilterTemplate.Location = new System.Drawing.Point(6, 42);
-            this.labelFilterTemplate.Name = "labelFilterTemplate";
-            this.labelFilterTemplate.Size = new System.Drawing.Size(54, 13);
-            this.labelFilterTemplate.TabIndex = 15;
-            this.labelFilterTemplate.Text = "Template:";
+            this.labelOverlayHotkey.AutoSize = true;
+            this.labelOverlayHotkey.Location = new System.Drawing.Point(6, 92);
+            this.labelOverlayHotkey.Name = "labelOverlayHotkey";
+            this.labelOverlayHotkey.Size = new System.Drawing.Size(44, 13);
+            this.labelOverlayHotkey.TabIndex = 23;
+            this.labelOverlayHotkey.Text = "Hotkey:";
             // 
-            // contextMenuStripReset
+            // textBoxOverlayHotkey
             // 
-            this.contextMenuStripReset.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.resetToolStripMenuItem});
-            this.contextMenuStripReset.Name = "contextMenuStripReset";
-            this.contextMenuStripReset.Size = new System.Drawing.Size(103, 26);
-            // 
-            // resetToolStripMenuItem
-            // 
-            this.resetToolStripMenuItem.Name = "resetToolStripMenuItem";
-            this.resetToolStripMenuItem.Size = new System.Drawing.Size(102, 22);
-            this.resetToolStripMenuItem.Text = "Reset";
-            this.resetToolStripMenuItem.Click += new System.EventHandler(this.resetToolStripMenuItem_Click);
+            this.textBoxOverlayHotkey.ContextMenuStrip = this.contextMenuStripReset;
+            this.textBoxOverlayHotkey.Location = new System.Drawing.Point(93, 89);
+            this.textBoxOverlayHotkey.Name = "textBoxOverlayHotkey";
+            this.textBoxOverlayHotkey.Size = new System.Drawing.Size(173, 20);
+            this.textBoxOverlayHotkey.TabIndex = 22;
             // 
             // FormSettings
             // 
-            this.ClientSize = new System.Drawing.Size(617, 308);
+            this.ClientSize = new System.Drawing.Size(617, 309);
             this.Controls.Add(this.groupBoxFilter);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.groupBoxChaosRecipe);
@@ -342,6 +363,7 @@ namespace PoE_Chaos_Helper
             this.Name = "FormSettings";
             this.Text = "Settings";
             this.Load += new System.EventHandler(this.FormSettings_Load);
+            this.contextMenuStripReset.ResumeLayout(false);
             this.groupBoxOverlay.ResumeLayout(false);
             this.groupBoxOverlay.PerformLayout();
             this.groupBoxUser.ResumeLayout(false);
@@ -350,7 +372,6 @@ namespace PoE_Chaos_Helper
             this.groupBoxChaosRecipe.PerformLayout();
             this.groupBoxFilter.ResumeLayout(false);
             this.groupBoxFilter.PerformLayout();
-            this.contextMenuStripReset.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -384,5 +405,7 @@ namespace PoE_Chaos_Helper
         private System.Windows.Forms.TextBox textBoxFilterTemplate;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripReset;
         private System.Windows.Forms.ToolStripMenuItem resetToolStripMenuItem;
+        private System.Windows.Forms.Label labelOverlayHotkey;
+        private System.Windows.Forms.TextBox textBoxOverlayHotkey;
     }
 }

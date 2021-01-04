@@ -43,6 +43,13 @@ namespace PoE_Chaos_Helper
             Bitmap bitmap = new Bitmap(Width, Height);
             Graphics bitmapGraphics = Graphics.FromImage(bitmap);
 
+            // show OverlayBorder for easy config
+            if (Properties.Settings.Default.OverlayBorder == true)
+            {
+                HatchBrush semiTransBrush = new HatchBrush(HatchStyle.Percent50, TransparencyKey, Color.WhiteSmoke);
+                bitmapGraphics.FillRectangle(semiTransBrush, 0, 0, Width, Height);
+            }
+
             int setCount = 0;
             foreach(var set in itemSets)
             {

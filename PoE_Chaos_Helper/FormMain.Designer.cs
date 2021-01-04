@@ -333,6 +333,7 @@ namespace PoE_Chaos_Helper
             this.MaximizeBox = false;
             this.Name = "FormMain";
             this.Text = "Chaos Helper";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.groupBoxItems.ResumeLayout(false);
             this.groupBoxItems.PerformLayout();
             this.menuStrip.ResumeLayout(false);

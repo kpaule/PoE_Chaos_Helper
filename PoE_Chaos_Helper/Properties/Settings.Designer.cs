@@ -144,5 +144,29 @@ namespace PoE_Chaos_Helper.Properties {
                 this["FilterTemplate"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool OverlayBorder {
+            get {
+                return ((bool)(this["OverlayBorder"]));
+            }
+            set {
+                this["OverlayBorder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Alt + Shift + S")]
+        public string OverlayHotkey {
+            get {
+                return ((string)(this["OverlayHotkey"]));
+            }
+            set {
+                this["OverlayHotkey"] = value;
+            }
+        }
     }
 }

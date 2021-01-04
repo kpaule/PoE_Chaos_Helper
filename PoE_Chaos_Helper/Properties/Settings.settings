@@ -43,5 +43,11 @@
   &lt;string&gt;ItemLevel &amp;lt;= 74&lt;/string&gt;
 &lt;/ArrayOfString&gt;</Value>
     </Setting>
+    <Setting Name="OverlayBorder" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OverlayHotkey" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Alt + Shift + S</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

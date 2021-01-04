@@ -136,8 +136,7 @@ namespace PoE_Chaos_Helper
             return eligible;
         }
 
-        #region Events
-        private void overlayToolStripMenuItem_Click(object sender, EventArgs e)
+        private void toggleOverlay()
         {
             // Overlay is not open -> create it
             if (formOverlay == null)
@@ -145,7 +144,7 @@ namespace PoE_Chaos_Helper
                 formOverlay = new FormOverlay();
                 formOverlay.Show();
 
-                if(stash != null)
+                if (stash != null)
                 {
                     var tabIndex = Properties.Settings.Default.TabIndex;
                     // get items eligible for the chaos recipe
@@ -171,6 +170,12 @@ namespace PoE_Chaos_Helper
                 formOverlay.Close();
                 formOverlay = null;
             }
+        }
+
+        #region Events
+        private void overlayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            toggleOverlay();
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -204,7 +209,24 @@ namespace PoE_Chaos_Helper
             FormAbout formAbout = new FormAbout();
             formAbout.Show();
         }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            // Hotkey
+            try
+            {
+                GlobalHotKey.RegisterHotKey(Properties.Settings.Default.OverlayHotkey, () => toggleOverlay());
+
+            }
+            catch
+            {
+                MessageBox.Show("Can't register hotkey. Are settings correct?", "Settings Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
         #endregion
+
 
     }
 }

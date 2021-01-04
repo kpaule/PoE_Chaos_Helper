@@ -31,11 +31,18 @@ namespace PoE_Chaos_Helper
             textBoxFilterPath.Text = Properties.Settings.Default.FilterPath;
             textBoxOverlayLocation.Text = Properties.Settings.Default.OverlayLocation.ToString();
             textBoxOverlaySize.Text = Properties.Settings.Default.OverlaySize.ToString();
+            textBoxOverlayHotkey.Text = Properties.Settings.Default.OverlayHotkey;
 
             // convert saveable collection to string
             var filterTemplateCollection = Properties.Settings.Default.FilterTemplate;
             var filterTemplateList = filterTemplateCollection.Cast<string>().ToList();
             textBoxFilterTemplate.Text = string.Join(Environment.NewLine, filterTemplateList);
+
+            // overlay border
+            if (Properties.Settings.Default.OverlayBorder == false)
+                radioButtonHide.Checked = true;
+            else
+                radioButtonShow.Checked = true;
         }
 
         private void textBoxFilterPath_Click(object sender, EventArgs e)
@@ -75,6 +82,14 @@ namespace PoE_Chaos_Helper
             filterTemplateColl.AddRange(filterTemplateLines);
             Properties.Settings.Default.FilterTemplate = filterTemplateColl;
 
+            // overlay border
+            if (radioButtonHide.Checked)
+                Properties.Settings.Default.OverlayBorder = false;
+            else
+                Properties.Settings.Default.OverlayBorder = true;
+
+            // overlay hotkey
+            Properties.Settings.Default.OverlayHotkey = textBoxOverlayHotkey.Text;
 
             Properties.Settings.Default.Save();
         }
@@ -107,6 +122,10 @@ namespace PoE_Chaos_Helper
             else if (textBox == textBoxOverlaySize)
             {
                 textBox.Text = "{Width=635, Height=635}";
+            }
+            else if (textBox == textBoxOverlayHotkey)
+            {
+                textBox.Text = "Alt + Shift + S"; 
             }
 
         }
